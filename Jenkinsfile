@@ -1,7 +1,7 @@
 pipeline {
-    agant {label 'MASTER'}
+    agent {label 'MASTER'}
     stages {
-        stage ('scm') {
+        stage ('source') {
             steps {
                 git 'https://github.com/GitPr-cticeRepo/spring-petclinic.git'
             }
