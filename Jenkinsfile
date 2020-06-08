@@ -1,16 +1,14 @@
 pipeline {
     agent {label 'MASTER'}
+    triggers { pollscm('* * * * *')}
     stages {
-        stage ('source') {
+        stage ('clone and compile') {
             steps {
-                git 'https://github.com/GitPr-cticeRepo/spring-petclinic.git'
+                git branch: 'declarative'
+                url: https://github.com/GitPr-cticeRepo/spring-petclinic.git
+                sh 'mvn compile'
             }
         }
-        stage ('build') {
-            steps {
-                sh 'mvn package'
-            }
-         
-        }
+        
     }
 }
