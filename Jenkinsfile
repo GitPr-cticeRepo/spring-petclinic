@@ -1,13 +1,16 @@
 pipeline {
-    agent {label 'MASTER'}
-    triggers { pollSCM('* * * * *')}
+    agent any
+    triggers {
+        upstream (upstreamProjects: 'dummy', threshold: hudsom.model.Result.SUCCESS)
+    }
     stages {
-        stage ('clone and compile') {
+        stage ('scm') {
             steps {
-                git branch: 'declarative',
-                url: 'https://github.com/GitPr-cticeRepo/spring-petclinic.git'
-                sh 'mvn compile'
+                git 'https://github.com/GitPr-cticeRepo/spring-petclinic.git'
             }
+        }
+        stage ('build') {
+            sh 'mvn package'
         }
         
     }
