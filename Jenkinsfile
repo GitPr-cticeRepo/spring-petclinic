@@ -1,6 +1,6 @@
 pipeline {
     agent {label 'MASTER'}
-    triggers { pollscm('* * * * *')}
+    triggers { pollSCM('* * * * *')}
     stages {
         stage ('clone and compile') {
             steps {
